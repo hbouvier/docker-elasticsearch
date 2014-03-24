@@ -1,0 +1,4 @@
+#!/bin/sh
+NAME=${1-elasticsearch}
+docker run -d -name "${NAME}" -p :9200:9200  -p :9300:9300 hbouvier/elasticsearch
+

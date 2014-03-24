@@ -1,0 +1,10 @@
+{
+ "java": {
+     "jdk_version": "7",
+     "accept_license_agreement" : true
+  },	
+  "run_list": [
+    "recipe[java::default]",
+    "recipe[elasticsearch::default]"
+  ]
+} 
