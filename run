@@ -1,4 +1,19 @@
-#!/bin/sh
-NAME=${1-elasticsearch}
-docker run -d -name "${NAME}" -p :9200:9200  -p :9300:9300 hbouvier/elasticsearch
+#!/bin/bash
 
+usage() { echo "Usage: $0 --name <elasticsearch>" 1>&2; exit 1; }
+
+UNKNOWN_ARGS=""
+NAME=elasticsearch
+while [ "$1" != "" ] ; do
+    case "$1" in
+       --name) NAME="$2" ; shift 2 ;;
+       *) UNKNOWN_ARGS="$UNKNOWN_ARGS $1" ; shift ;;
+    esac
+done
+
+if [ "$UNKNOWN_ARGS" != "" ] ; then
+	usage
+	echo "UNKNOWN ARGUMENT: $UNKNOWN_ARGS"
+else 
+	docker run -d -name "${NAME}" -p 9200  -p 9300 hbouvier/elasticsearch
+fi
